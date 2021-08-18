@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    [data-color="red"] { color: red; }
+    [data-color="blue"] { color: blue; }
+    [data-color="green"] { color: green; }
+    [data-color="orange"] { color: orange; }
+    [data-color="purple"] { color: purple; }
+  </style>
+  <script>
+    window.myHandler = function () {
+      console.log('Click!');
+    };
+
+    window.getRandomNumber = function (max) {
+      return Math.floor(Math.random() * max)
+    }
+
+    var colors = ['red', 'blue', 'green', 'orange', 'purple'];
+    window.changeHeadlineColor = function (croHeadline) {
+      var random = getRandomNumber(5000);
+      var randomString = random.toString();
+      setTimeout(() => {
+        var colorKey = (randomString.length < 4) ? 0 : parseInt(randomString.charAt(0));
+        croHeadline.setAttribute('data-color', colors[colorKey]);
+        changeHeadlineColor(croHeadline);
+      }, random);
+    };
+  </script>
+  <script>
+    ////////////////////
+    /* YOUR CODE HERE */
+    ////////////////////
+  </script>
+</head>
+
+<body>
+<div id="myDiv">OMG Click me!</div>
+<script>
+  document.querySelector('#myDiv').addEventListener('click', myHandler);
+
+  setTimeout(() => {
+    myDiv.insertAdjacentHTML('beforebegin', '<h1 id="cro-headline" data-color="red">Cro Metrics</h1>');
+    var croHeadline = document.querySelector('#cro-headline');
+    changeHeadlineColor(croHeadline);
+  }, getRandomNumber(5000));
+</script>
+</body>
